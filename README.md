@@ -1,4 +1,4 @@
-### SQL MINI-COURSE
+#### SQL Mini-Course
 
 This mini-course provides comprehensive coverage of the long-accepted standard query language for relational database systems. It will be available for an extended period of time. We anticipate the content will be available at least until June 9th, 2015. You will be notified by email of any changes to content availability beforehand.
 
