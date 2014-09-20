@@ -1,0 +1,1 @@
+This mini-course is part of a series on the general topic of Databases. Visit the [home page](https://class.stanford.edu/courses/DB/2014/SelfPaced/about) to learn more about the entire series, and to access the other mini-courses.
