@@ -1,4 +1,7 @@
 /* Delete the tables if they already exist */
+Create database DB5Movie;
+use DB5Movie;
+
 drop table if exists Movie;
 drop table if exists Reviewer;
 drop table if exists Rating;

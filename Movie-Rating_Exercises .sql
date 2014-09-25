@@ -1,3 +1,5 @@
+use DB5Movie;
+
 /* Q1
 Find the titles of all movies directed by Steven Spielberg. */
 
@@ -327,7 +329,7 @@ For each director, return the director's name together with the title(s) of the 
 directed that received the highest rating among all of their movies, and the value of that rating. 
 Ignore movies whose director is NULL. */
 
-	/*First do query to picture grouping*/
+	/*First do query to picture */
 	select director, title, stars
 	from Movie M join Rating R using(mID)
 	where director is not null			  
@@ -344,3 +346,64 @@ and not exists (select *
 			 where MR.director = MR2.director
 			 and MR.stars < MR2.stars)
 order by director;
+
+
+
+/*** MODIFICATION Exercises ***/
+
+/* Q1
+Add the reviewer Roger Ebert to your database, with an rID of 209. */
+
+insert into Reviewer values (209, 'Roger Ebert');
+
+
+/* Q2 
+Insert 5-star ratings by James Cameron for all movies in the database. Leave the review date as NULL. */
+
+		select *
+		from Movie, Reviewer
+		where name = 'James Cameron';
+		/* with no join condition, (M.mID = Re.mID) it selects the arbitrary combinations 
+		where all movies are directed from James Cameron). */
+
+Insert into Rating
+select rID, mID, 5, null
+from Movie, Reviewer
+where name = 'James Cameron';
+
+ 
+/* Q3
+For all movies that have an average rating of 4 stars or higher, add 25 to the release year. 
+(Update the existing tuples; don't insert new tuples.) */
+
+update Movie
+set year = year + 25
+where mID in (
+	select mID
+	from Rating 
+	group by mID
+	having  avg(stars) >=4);
+
+
+/* Q4
+Remove all ratings where the movie's year is before 1970 or after 2000, and the rating is 
+fewer than 4 stars. */
+		
+
+	select mID, stars
+	from Rating
+	where mID in (
+		select mID from Movie 
+		where year <1970 or year > 2000
+		)
+	and stars < 4;
+
+
+delete 
+from Rating
+where mID in (
+	select mID from Movie 
+	where year <1970 or year > 2000)
+and stars < 4;
+
+
